@@ -324,7 +324,7 @@ func (t *Table) Update(recordPtr interface{}) error {
 	if err != nil {
 		panic(fmt.Errorf("airtable.Table#Update: unable to create JSON (%s)", err))
 	}
-	_, err = t.client.RequestWithBody("PATCH", t.makePath(id), Options{}, body)
+	_, err = t.client.RequestWithBody("PATCH", t.makePath(id), Options{Typecast: true}, body)
 	if err != nil {
 		return err
 	}
@@ -350,7 +350,7 @@ func (t *Table) Create(recordPtr interface{}) error {
 		panic(fmt.Errorf("airtable.Table#Create: unable to create JSON (%s)", err))
 	}
 
-	res, err := t.client.RequestWithBody("POST", t.makePath(""), Options{}, body)
+	res, err := t.client.RequestWithBody("POST", t.makePath(""), Options{Typecast: true}, body)
 	if err != nil {
 		return err
 	}
