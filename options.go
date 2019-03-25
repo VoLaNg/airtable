@@ -121,7 +121,8 @@ func getFieldJSONName(field string, t reflect.Type) string {
 		panic(fmt.Errorf("could not sort by %s: no such field in %s", field, t))
 	}
 	if json, ok := f.Tag.Lookup("json"); ok {
-		field = json
+		tags := strings.Split(json, ",")
+		field = tags[0]
 	}
 	return field
 }
